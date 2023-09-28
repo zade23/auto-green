@@ -1,0 +1,43 @@
+name: 'Bing Paper'
+
+on:
+  push:
+    branches:
+      - main
+  schedule:
+    - cron: '0 1 * * *'
+
+jobs:
+  bing-paper:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 'Checkout codes'
+        uses: actions/checkout@v1
+
+      - name: Set up Python 3.10.13
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.10.13
+      
+      - name: Install requestes
+        run: pip install requests
+
+      - name: Get paper
+        run: python ./bing.py
+
+      - name: Update readMe
+        run: python ./update.py
+      
+      - name: Commit
+        run: |
+          git config --local user.email "438063169@qq.com"
+          git config --local user.name "zade23"
+          git add .
+          git commit -m "update" -a
+          
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: 'main'
