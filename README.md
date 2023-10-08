@@ -1,6 +1,7 @@
 # Bing wallpaper actions
+
 Today's wallpaper.
 
-![20230928.jpg](papers/20230928.jpg)
+![20231008.jpg](papers/20231008.jpg)
 
 Enjoy it.
